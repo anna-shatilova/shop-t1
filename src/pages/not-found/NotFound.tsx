@@ -25,4 +25,3 @@ function NotFound() {
 }
 
 export default NotFound
-//       <img src={reactLogo} className={styles.logo} alt="React logo" />

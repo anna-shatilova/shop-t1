@@ -7,10 +7,10 @@ import CartPage from './pages/cart-page/CartPage'
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/product/:id" element={<ProductPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
