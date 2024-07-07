@@ -1,39 +1,3 @@
-.wrapper {
-  width: 100%;
-  min-height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.container {
-  padding: 0 calc(50% - 590px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-}
-
-.headerFooter {
-  width: 100%;
-  height: 90px;
-}
-.headerBackground {
-  background-color: #484283;
-}
-
-.footerBackground {
-  background-color: #444b58;
-}
-.logo {
-  /* width: 164px;
-  height: 44px; */
-  cursor: pointer;
-}
-.logoImg {
-  width: 164px;
-  height: 44px;
-}
 .top {
   height: 500px;
   border-top: 1px solid #ffffff;

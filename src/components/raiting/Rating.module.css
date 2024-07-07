@@ -1,0 +1,15 @@
+.rating {
+  display: flex;
+  gap: 4px;
+}
+svg {
+  width: 20px;
+  height: 20px;
+}
+.fullStar {
+  fill: #f14f4f;
+}
+
+.emptyStar {
+  fill: #d5d5d5;
+}
