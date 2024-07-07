@@ -54,11 +54,11 @@
   font-weight: 400;
   line-height: 22px;
   color: #ffffff;
-  transition: all 0.3s ease-out;
 }
 
 .topButton:hover {
   background: #8c2828;
+  transition: all 0.3s ease-out;
 }
 .topButton:disabled {
   background: #f8afaf;
@@ -85,9 +85,13 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
+}
+.inputSearch::placeholder {
   color: #b2b5bb;
 }
-
+.inputSearch:focus {
+  color: #444b58;
+}
 .productBlock {
   display: flex;
   flex-direction: row;
@@ -135,6 +139,7 @@
 .productContext {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 .productHeading {
   font-size: 16px;
@@ -144,7 +149,6 @@
   margin-bottom: 6px;
 }
 .productHeading:hover {
-  /* background: ; */
   text-decoration: underline;
 }
 .productPrice {
@@ -153,6 +157,26 @@
   line-height: 24px;
   color: #444b58;
 }
+.buttonBlock {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.buttonCount {
+  width: 50px;
+  height: 50px;
+  padding: 16px;
+  border-radius: 4px;
+  background: #f14f4f;
+  color: #ffffff;
+}
+.counter {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  color: #444b58;
+}
+
 .productButton {
   width: 50px;
   border-radius: 4px;

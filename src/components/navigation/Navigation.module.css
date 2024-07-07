@@ -8,12 +8,23 @@
   line-height: 20px;
   color: #ffffff;
 }
+
+.li:hover {
+  color: #c4c4c4;
+  text-decoration: underline;
+}
+.liAvatar {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+}
 .cartBlock {
   display: flex;
   gap: 6px;
 }
 .cartBlockSvg {
-    position: relative;
+  position: relative;
 }
 .cartImg {
   width: 20px;

@@ -1,0 +1,175 @@
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  padding: 48px calc(50% - 590px);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  height: 100%;
+}
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #444b58;
+}
+.cartContainer {
+  display: flex;
+  gap: 48px;
+  margin-bottom: 44px;
+}
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 40px;
+  border: 1px solid #c4c4c4;
+}
+.cartItem {
+  display: flex;
+  gap: 24px;
+  margin: 12px;
+  align-items: center;
+}
+.cartItem:hover {
+  background: #f6f6f6;
+  transition: 0.3s;
+}
+.cartItemStartDel {
+  justify-content: space-between;
+  margin-right: 12px;
+}
+.cartItemContent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.cartImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+.cartImgStartDel {
+  opacity: 0.8;
+}
+.itemHeading {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #444b58;
+}
+.itemHeading:hover {
+  text-decoration: underline;
+}
+.itemPrice {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #444b58;
+}
+.nameProdStartDel {
+  color: #444b58;
+}
+.cartButtonBlock {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+}
+.buttonBlock {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.buttonCount {
+  width: 50px;
+  height: 50px;
+  padding: 16px;
+  border-radius: 4px;
+  background: #f14f4f;
+  color: #ffffff;
+}
+.buttonCountPlus:hover {
+  background: #8c2828;
+  transition: 0.3s;
+}
+.counter {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  color: #444b58;
+}
+.deleteText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #b2b5bb;
+  margin-left: 48px;
+}
+.deleteText:hover {
+  text-decoration: underline;
+}
+.productButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background: #f14f4f;
+  margin-right: 12px;
+}
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #b2b5bb;
+  width: 30%;
+}
+.priceTop {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.priceRowBlock {
+  display: flex;
+  justify-content: space-between;
+}
+.countName {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+}
+.count {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #444b58;
+}
+.priceName {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #444b58;
+}
+.totalPriceName {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+}
+.totalPrice {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #444b58;
+}

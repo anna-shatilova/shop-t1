@@ -9,7 +9,7 @@ interface NavigationProps {
 function Navigation({ panel }: NavigationProps) {
   return (
     <ul className={styles.ul}>
-      <Link to={'/catalog'}>
+      <Link to={'/'}>
         <li className={styles.li}>Catalog</li>
       </Link>
 
@@ -26,7 +26,7 @@ function Navigation({ panel }: NavigationProps) {
               <span className={styles.cartCounter}>1</span>
             </div>
           </Link>
-          <li className={styles.li}>Johnson Smith</li>
+          <li className={styles.liAvatar}>Johnson Smith</li>
         </>
       )}
     </ul>
