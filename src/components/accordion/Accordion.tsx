@@ -39,7 +39,7 @@ const Accordion = () => {
     }
   }
   return (
-    <section className={styles.containerAccordion}>
+    <section id="FQA" className={styles.containerAccordion}>
       <div className={styles.accordion}>
         <h2 className={styles.headingFqa}>FQA</h2>
         {items.map((item, id) => (

@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'Jost';
-  src: url('/fonts/Jost/Jost-Regular.ttf');
+  src: url('/fonts/Jost/Jost-Regular.ttf') format ("ttf");
   font-style: normal;
 }
 

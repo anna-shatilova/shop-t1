@@ -5,6 +5,7 @@ import Accordion from '../../components/accordion/Accordion'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
+import { handleScrollToAnchorCatalog } from '../../helpers/Helper'
 
 function MainPage() {
   return (
@@ -25,12 +26,21 @@ function MainPage() {
                   We sell smartphones, laptops, clothes, shoes <br /> and many
                   other products at low prices
                 </h3>
-                <button className={styles.topButton}>Go to shopping</button>
+                <Link to={'#catalog'}>
+                  <button
+                    onClick={handleScrollToAnchorCatalog}
+                    className={styles.topButton}
+                  >
+                    Go to shopping
+                  </button>
+                </Link>
               </div>
             </div>
           </section>
           <section className={styles.containerCenter}>
-            <h1 className={styles.title}>Catalog</h1>
+            <h1 className={styles.title} id="catalog">
+              Catalog
+            </h1>
             <input
               className={styles.inputSearch}
               type="text"
@@ -39,7 +49,7 @@ function MainPage() {
             />
             <div className={styles.productBlock}>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -51,7 +61,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -74,7 +84,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -86,7 +96,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -109,7 +119,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -121,7 +131,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -144,7 +154,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -156,7 +166,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -179,7 +189,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -191,7 +201,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -214,7 +224,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -226,7 +236,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Las...
                     </h3>
@@ -270,7 +280,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -282,7 +292,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -305,7 +315,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -317,7 +327,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -340,7 +350,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -352,7 +362,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -375,7 +385,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -387,7 +397,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -410,7 +420,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -422,7 +432,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>
@@ -445,7 +455,7 @@ function MainPage() {
                 </div>
               </section>
               <section className={styles.product}>
-                <Link to={'/'}>
+                <Link to={'/product/12'}>
                   <div className={styles.imgContainer}>
                     <img
                       src={product}
@@ -457,7 +467,7 @@ function MainPage() {
                   </div>
                 </Link>
                 <div className={styles.productContext}>
-                  <Link to={'/'}>
+                  <Link to={'/product/12'}>
                     <h3 className={styles.productHeading}>
                       Essence Mascara Lash Princess
                     </h3>

@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.css'
 import cartSvg from '../../assets/cart.svg'
+import {
+  handleScrollToAnchorCatalog,
+  handleScrollToAnchorFQA,
+} from '../../helpers/Helper'
 
 interface NavigationProps {
   panel: string
@@ -9,12 +13,16 @@ interface NavigationProps {
 function Navigation({ panel }: NavigationProps) {
   return (
     <ul className={styles.ul}>
-      <Link to={'/'}>
-        <li className={styles.li}>Catalog</li>
+      <Link to={'#catalog'}>
+        <li className={styles.li} onClick={handleScrollToAnchorCatalog}>
+          Catalog
+        </li>
       </Link>
 
-      <Link to={'/'}>
-        <li className={styles.li}>FAQ</li>
+      <Link to={'#FQA'}>
+        <li className={styles.li} onClick={handleScrollToAnchorFQA}>
+          FAQ
+        </li>
       </Link>
 
       {panel === 'header' && (
