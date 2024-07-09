@@ -4,6 +4,7 @@ import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import shoes from '../../assets/shoes.png'
 import { Link } from 'react-router-dom'
+import TableTotalPrice from '../../components/table/TableTotalPrice'
 function CartPage() {
   return (
     <HelmetProvider>
@@ -207,22 +208,7 @@ function CartPage() {
                 </button>
               </li>
             </ul>
-            <div className={styles.priceBlock}>
-              <div className={styles.priceTop}>
-                <div className={styles.priceRowBlock}>
-                  <p className={styles.countName}>Total count</p>
-                  <p className={styles.count}>3 items</p>
-                </div>
-                <div className={styles.priceRowBlock}>
-                <p className={styles.priceName}>Price without discount</p>
-                  <p className={styles.price}>700$</p>
-                </div>
-              </div>
-              <div className={styles.priceRowBlock}>
-                <p className={styles.totalPriceName}>Total price</p>
-                <p className={styles.totalPrice}>590$</p>
-              </div>
-            </div>
+            <TableTotalPrice />
           </section>
         </div>
       </main>
