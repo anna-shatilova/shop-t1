@@ -36,10 +36,10 @@
   gap: 24px;
   margin: 12px;
   align-items: center;
+  transition: background 0.3s;
 }
 .cartItem:hover {
   background: #f6f6f6;
-  transition: 0.3s;
 }
 .cartItemStartDel {
   justify-content: space-between;
@@ -94,10 +94,10 @@
   border-radius: 4px;
   background: #f14f4f;
   color: #ffffff;
+  transition: background 0.3s;
 }
 .buttonCountPlus:hover {
   background: #8c2828;
-  transition: 0.3s;
 }
 .counter {
   font-size: 14px;
@@ -122,4 +122,3 @@
   background: #f14f4f;
   margin-right: 12px;
 }
-

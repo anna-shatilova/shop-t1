@@ -70,8 +70,7 @@ const Accordion = () => {
               <div
                 className={styles.answer}
                 style={{
-                  transition: 'height 0.5s ease-out',
-                  height: activeItems.includes(item) ? 'auto' : '0px',
+                  height: activeItems.includes(item) ? 'auto' : '0',
                 }}
               >
                 {item.answer}

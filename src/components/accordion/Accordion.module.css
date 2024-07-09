@@ -17,7 +17,6 @@
   border-bottom: 1px solid #ffffff;
   padding: 20px 0;
   overflow: hidden;
-  transition: 'height 0.5s ease-out';
 }
 .question {
   display: flex;
@@ -45,11 +44,12 @@
 
 .plusRotate {
   transform: rotate(45deg);
-  transition: all 0.3s ease-out;
+  transition: transform 0.5s;
 }
 .answer {
   padding-top: 20px;
   font-size: 16px;
   font-weight: 600;
   line-height: 26px;
+  transition: height 0.5s;
 }
