@@ -67,7 +67,7 @@ function CartPage() {
                       </svg>
                     </button>
                   </div>
-                  <p className={styles.deleteText}>Delete</p>
+                  <button className={styles.deleteText}>Delete</button>
                 </div>
               </li>
               <li className={styles.cartItem}>
@@ -120,7 +120,7 @@ function CartPage() {
                       </svg>
                     </button>
                   </div>
-                  <p className={styles.deleteText}>Delete</p>
+                  <button className={styles.deleteText}>Delete</button>
                 </div>
               </li>
               <li className={styles.cartItem}>
@@ -173,7 +173,7 @@ function CartPage() {
                       </svg>
                     </button>
                   </div>
-                  <p className={styles.deleteText}>Delete</p>
+                  <button className={styles.deleteText}>Delete</button>
                 </div>
               </li>
               <li className={`${styles.cartItem} ${styles.cartItemStartDel}`}>
