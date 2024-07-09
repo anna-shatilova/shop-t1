@@ -12,10 +12,12 @@
   font-size: 36px;
   font-weight: 700;
   line-height: 56px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ffffff;
 }
 .item {
   border-bottom: 1px solid #ffffff;
-  padding: 20px 0;
+  padding: 30px 0 20px 0;
   overflow: hidden;
 }
 .question {
@@ -32,14 +34,14 @@
 }
 
 .toggle {
-  font-size: 24px;
+  /* font-size: 24px;
   font-weight: 400;
-  border: none;
+  border: none; */
   background-color: transparent;
-  color: #ffffff;
+  /* color: #ffffff; */
   cursor: pointer;
-  width: 25px;
-  height: 25px;
+  /* width: 25px;
+  height: 25px; */
 }
 
 .plusRotate {

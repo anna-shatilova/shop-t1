@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import imageNotFound from '../../assets/not-found.png'
-// import { Button } from '../../App.styles'
 import styles from './NotFound.module.css'
 
 function NotFound() {
