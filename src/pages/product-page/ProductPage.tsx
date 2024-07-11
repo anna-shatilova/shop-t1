@@ -4,8 +4,12 @@ import shoes from '../../assets/shoes.png'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import Rating from '../../components/raiting/Rating'
+// import { useParams } from 'react-router-dom'
 
 function ProductPage() {
+  // const { id } = useParams()
+  // const toNumber = Number(id)
+
   return (
     <HelmetProvider>
       <Helmet>
