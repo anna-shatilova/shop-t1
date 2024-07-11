@@ -19,6 +19,5 @@ export const calculateTotalPriceProduct = (
   const discountDecimal = discountPercentage / 100
   const discountAmount = initialPrice * discountDecimal
   const finalPrice = initialPrice - discountAmount
-  Math.round(finalPrice)
-  return Math.round(finalPrice)
+  return finalPrice.toFixed(2)
 }

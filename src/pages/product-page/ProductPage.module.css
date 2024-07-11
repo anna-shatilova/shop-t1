@@ -13,6 +13,12 @@
   height: 100%;
   padding-bottom: 114px;
 }
+.loading {
+  font-size: 24px;
+  font-weight: 400;
+  color: #444b58;
+  margin-top: 48px;
+}
 .mainImg {
   width: 520px;
   height: 520px;
@@ -29,10 +35,6 @@
   height: 70px;
   border-radius: 4px;
 }
-.img:first-child {
-  border: 3px solid #c4c4c4;
-}
-
 .blockProductRight {
   display: flex;
   flex-direction: column;
@@ -55,10 +57,15 @@
   justify-content: space-between;
 }
 .ratingText {
+  display: flex;
+  gap: 5px;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   color: #646464;
+}
+.ratingText p:not(:last-child)::after {
+  content: ',';
 }
 .productLimitation {
   border-width: 1px 0;

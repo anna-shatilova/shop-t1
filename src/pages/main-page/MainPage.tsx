@@ -7,10 +7,34 @@ import Footer from '../../components/footer/Footer'
 import { handleScrollToAnchorCatalog } from '../../helpers/Helper'
 import { useGetProductsQuery } from '../../api/productApi'
 import ProductItems from '../../components/product-items/ProductItems'
+import { useState } from 'react'
+// import { debounce } from 'lodash'
 
 function MainPage() {
-  const { data: allProducts, isLoading} = useGetProductsQuery(12)
-console.log(allProducts);
+  const [countProduct, setCountProduct] = useState(12)
+  const [searchText, setSearchText] = useState('')
+  // const [allProducts, setAllProducts] = useState()
+
+  const { data: allProducts, isLoading } = useGetProductsQuery({
+    limit: countProduct,
+    search: searchText,
+  })
+  // const debouncedSearchText = useCallback(
+  //   debounce((value: string) => setSearchText(value), 300),
+  //   []
+  // );
+
+  // const handlerSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   debouncedSearchText(event.currentTarget.value);
+  // };
+
+  const handlerSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.currentTarget.value)
+  }
+  const handlerAddMoreProducts = () => {
+    setCountProduct(countProduct + 12)
+  }
+
   return (
     <HelmetProvider>
       <div className={styles.wrapper}>
@@ -45,13 +69,34 @@ console.log(allProducts);
               Catalog
             </h1>
             <input
+              value={searchText}
+              onChange={handlerSearchText}
               className={styles.inputSearch}
               type="text"
               placeholder="Search by title"
               aria-label="поле ввода поиска"
             />
-            <ProductItems allProducts={allProducts?.products} isLoading={isLoading}/>
-            <button className={styles.buttonShowMore}>Show more</button>
+            {allProducts?.total === 0 && (
+              <h3 className={styles.noProducts}>
+                No products found. Try again.
+              </h3>
+            )}
+            <ProductItems
+              allProducts={allProducts?.products}
+              isLoading={isLoading}
+            />
+            <button
+              style={{
+                visibility:
+                  allProducts?.total === allProducts?.limit
+                    ? 'hidden'
+                    : 'visible',
+              }}
+              className={styles.buttonShowMore}
+              onClick={handlerAddMoreProducts}
+            >
+              Show more
+            </button>
           </section>
           <Accordion />
         </main>
