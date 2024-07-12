@@ -8,9 +8,10 @@ import {
 
 interface NavigationProps {
   panel: string
+  totalQuantityCart?: number
 }
 
-function Navigation({ panel }: NavigationProps) {
+function Navigation({ panel, totalQuantityCart }: NavigationProps) {
   return (
     <ul className={styles.ul}>
       <Link to={'#catalog'}>
@@ -31,7 +32,9 @@ function Navigation({ panel }: NavigationProps) {
             <li className={styles.li}>Cart</li>
             <div className={styles.cartBlockSvg}>
               <img className={styles.cartImg} src={cartSvg} alt="cart" />
-              <span className={styles.cartCounter}>1</span>
+              {totalQuantityCart && (
+                <span className={styles.cartCounter}>{totalQuantityCart}</span>
+              )}
             </div>
           </Link>
           <li className={styles.liAvatar}>Johnson Smith</li>

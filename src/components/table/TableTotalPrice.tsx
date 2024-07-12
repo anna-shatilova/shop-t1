@@ -1,6 +1,16 @@
+import { pluralizeItem } from '../../helpers/Helper'
 import styles from './TableTotalPrice.module.css'
 
-function TableTotalPrice() {
+interface PropsTable {
+  totalProducts: number
+  total: number
+  discountedTotal: number
+}
+const TableTotalPrice: React.FC<PropsTable> = ({
+  totalProducts,
+  discountedTotal,
+  total,
+}) => {
   return (
     <table role="table" aria-label="Total price">
       <tbody role="rowgroup">
@@ -9,7 +19,7 @@ function TableTotalPrice() {
             Total count
           </td>
           <td role="cell" className={styles.count}>
-            3 items
+            {totalProducts} {pluralizeItem(totalProducts)}
           </td>
         </tr>
         <tr role="row">
@@ -17,7 +27,7 @@ function TableTotalPrice() {
             Price without discount
           </td>
           <td role="cell" className={`${styles.priceName} ${styles.price}`}>
-            700$
+            {total}$
           </td>
         </tr>
       </tbody>
@@ -30,7 +40,7 @@ function TableTotalPrice() {
             role="columnheader"
             className={`${styles.totalPriceName} ${styles.totalPrice}`}
           >
-            590$
+            {discountedTotal}$
           </td>
         </tr>
       </tfoot>

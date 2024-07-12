@@ -15,10 +15,15 @@ function MainPage() {
   const [searchText, setSearchText] = useState('')
   // const [allProducts, setAllProducts] = useState()
 
-  const { data: allProducts, isLoading } = useGetProductsQuery({
+  const {
+    data: allProducts,
+    isLoading,
+    error,
+  } = useGetProductsQuery({
     limit: countProduct,
     search: searchText,
   })
+
   // const debouncedSearchText = useCallback(
   //   debounce((value: string) => setSearchText(value), 300),
   //   []
@@ -84,6 +89,7 @@ function MainPage() {
             <ProductItems
               allProducts={allProducts?.products}
               isLoading={isLoading}
+              error={error}
             />
             <button
               style={{
