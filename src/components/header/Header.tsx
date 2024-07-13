@@ -2,13 +2,8 @@ import { Link } from 'react-router-dom'
 import styles from './Header.module.css'
 import Navigation from '../navigation/Navigation'
 import Logo from '../../assets/logo.svg'
-import { useGetCartUserByIdQuery } from '../../services/hook'
 
 const Header = () => {
-  const idUserForCart = 33
-
-  const { data: cartUserById } = useGetCartUserByIdQuery(idUserForCart)
-  const cartUser = cartUserById?.carts[0]
   return (
     <header
       className={`${styles.headerFooter} ${styles.headerBackground} ${styles.wrapper}`}
@@ -24,7 +19,6 @@ const Header = () => {
         <nav>
           <Navigation
             panel="header"
-            totalQuantityCart={cartUser?.totalQuantity}
           />
         </nav>
       </div>

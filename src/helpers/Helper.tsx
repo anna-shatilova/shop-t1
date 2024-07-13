@@ -1,4 +1,4 @@
-import { ICartProducts } from '../interface/ApiInterface'
+import { ICartProducts } from "../interface/ApiInterface"
 
 export const handleScrollToAnchorCatalog = () => {
   const anchorCatalog = document.getElementById('catalog')

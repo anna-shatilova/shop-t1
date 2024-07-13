@@ -5,13 +5,21 @@ import {
   handleScrollToAnchorCatalog,
   handleScrollToAnchorFQA,
 } from '../../helpers/Helper'
+// import { useSelector } from 'react-redux'
+// import { RootState } from '../../store/store'
+import { useGetCartUserByIdQuery } from '../../services/hook'
 
 interface NavigationProps {
   panel: string
-  totalQuantityCart?: number
 }
 
-function Navigation({ panel, totalQuantityCart }: NavigationProps) {
+function Navigation({ panel }: NavigationProps) {
+  const idUserForCart = 33
+  const { data: cartUserById} = useGetCartUserByIdQuery(idUserForCart)
+  // const cartUserById = useSelector((state: RootState) => state.cart.allCarts)
+
+  const cartUser = cartUserById?.carts[0]
+
   return (
     <ul className={styles.ul}>
       <Link to={'#catalog'}>
@@ -32,8 +40,10 @@ function Navigation({ panel, totalQuantityCart }: NavigationProps) {
             <li className={styles.li}>Cart</li>
             <div className={styles.cartBlockSvg}>
               <img className={styles.cartImg} src={cartSvg} alt="cart" />
-              {totalQuantityCart && (
-                <span className={styles.cartCounter}>{totalQuantityCart}</span>
+              {cartUser?.totalQuantity && (
+                <span className={styles.cartCounter}>
+                  {cartUser?.totalQuantity}
+                </span>
               )}
             </div>
           </Link>

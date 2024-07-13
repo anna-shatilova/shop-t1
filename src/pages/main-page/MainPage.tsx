@@ -5,15 +5,20 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import { handleScrollToAnchorCatalog } from '../../helpers/Helper'
-import { useGetProductsQuery } from '../../api/productApi'
+import { useGetProductsQuery } from '../../services/productApi'
 import ProductItems from '../../components/product-items/ProductItems'
-import { useState } from 'react'
-// import { debounce } from 'lodash'
+import { useCallback, useEffect, useState } from 'react'
+import { debounce } from 'lodash'
+import { useAppDispatch } from '../../store/store'
+import { fetchCartUserById } from '../../services/cartSlice'
+// import { useAppDispatch } from '../../store/store'
+// import { fetchCartUserById } from '../../services/cartSlice'
 
 function MainPage() {
   const [countProduct, setCountProduct] = useState(12)
   const [searchText, setSearchText] = useState('')
-  // const [allProducts, setAllProducts] = useState()
+  const [debouncedSearchText, setDebouncedSearchText] = useState('')
+  const dispatch = useAppDispatch()
 
   const {
     data: allProducts,
@@ -21,24 +26,28 @@ function MainPage() {
     error,
   } = useGetProductsQuery({
     limit: countProduct,
-    search: searchText,
+    search: debouncedSearchText,
   })
 
-  // const debouncedSearchText = useCallback(
-  //   debounce((value: string) => setSearchText(value), 300),
-  //   []
-  // );
-
-  // const handlerSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   debouncedSearchText(event.currentTarget.value);
-  // };
+  const debouncedHandlerSearchText = useCallback(
+    debounce((value) => {
+      setDebouncedSearchText(value)
+    }, 500),
+    [],
+  )
 
   const handlerSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.currentTarget.value)
+    debouncedHandlerSearchText(event.currentTarget.value)
   }
+
   const handlerAddMoreProducts = () => {
     setCountProduct(countProduct + 12)
   }
+  const idUserForCart = 33
+  useEffect(() => {
+    dispatch(fetchCartUserById(idUserForCart))
+  }, [idUserForCart, dispatch])
 
   return (
     <HelmetProvider>

@@ -5,9 +5,9 @@ import Footer from '../../components/footer/Footer'
 import Rating from '../../components/raiting/Rating'
 import { useParams } from 'react-router-dom'
 import { calculateTotalPriceProduct, findProductQuantity } from '../../helpers/Helper'
-import { useGetProductByIdQuery } from '../../api/productApi'
 import { useState } from 'react'
 import { useGetCartUserByIdQuery } from '../../services/hook'
+import { useGetProductByIdQuery } from '../../services/productApi'
 
 function ProductPage() {
   const { id } = useParams()

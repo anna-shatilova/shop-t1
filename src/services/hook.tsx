@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   fetchCartUserById,
   selectDataById,
   selectStatusById,
 } from './cartSlice'
-import { RootState } from '../store/store'
+import { RootState, useAppDispatch } from '../store/store'
 
 export function useGetCartUserByIdQuery(id: number) {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const status = useSelector((state: RootState) => selectStatusById(state, id))
   const data = useSelector((state: RootState) => selectDataById(state, id))
   useEffect(() => {

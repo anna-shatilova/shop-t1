@@ -10,9 +10,10 @@ import { calculateTotalPriceProduct, pluralizeItem } from '../../helpers/Helper'
 function CartPage() {
   const idUserForCart = 33
   const { data: cartUserById, isError, isLoading } = useGetCartUserByIdQuery(idUserForCart)
+  
   const cartUser = cartUserById?.carts[0]
+
   const cartUserProducts = cartUser?.products
-  console.log(cartUserById)
 
   return (
     <HelmetProvider>

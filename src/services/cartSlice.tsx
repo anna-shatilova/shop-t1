@@ -1,7 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store/store'
-import { CartUserById } from './types'
+import { ICartProducts } from '../interface/ApiInterface'
 
+type CartUserById = {
+  carts: {
+    id: number
+    products: ICartProducts[]
+    userId: number
+    total: number
+    discountedTotal: number
+    totalProducts: number
+    totalQuantity: number
+  }[]
+}
 
 export const fetchCartUserById = createAsyncThunk<CartUserById, number>(
   'cart/fetchByUserId',
