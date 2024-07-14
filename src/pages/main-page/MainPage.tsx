@@ -10,6 +10,7 @@ import ProductItems from '../../components/product-items/ProductItems'
 import { useCallback, useState } from 'react'
 import { debounce } from 'lodash'
 import { useGetCartUserByIdQuery } from '../../services/hook'
+import { Button } from '../../components/button/Button'
 
 function MainPage() {
   const [countProduct, setCountProduct] = useState(12)
@@ -64,12 +65,11 @@ function MainPage() {
                   other products at low prices
                 </h3>
                 <Link to={'#catalog'}>
-                  <button
+                  <Button
                     onClick={handleScrollToAnchorCatalog}
-                    className={styles.topButton}
-                  >
-                    Go to shopping
-                  </button>
+                    label={'Go to shopping'}
+                    mode={true}
+                  />
                 </Link>
               </div>
             </div>

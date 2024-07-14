@@ -3,7 +3,7 @@ import styles from './Header.module.css'
 import Navigation from '../navigation/Navigation'
 import Logo from '../../assets/logo.svg'
 
-const Header = () => {
+export const Header = () => {
   return (
     <header
       className={`${styles.headerFooter} ${styles.headerBackground} ${styles.wrapper}`}

@@ -48,20 +48,6 @@
   font-weight: 600;
   line-height: 24px;
 }
-.topButton {
-  position: absolute;
-  top: 323px;
-  width: 207px;
-  height: 62px;
-  border-radius: 4px;
-  background: #f14f4f;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
-  color: #ffffff;
-  transition: background 0.3s;
-}
-
 .topButton:hover {
   background: #8c2828;
 }

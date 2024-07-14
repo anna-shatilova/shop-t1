@@ -10,7 +10,7 @@ import { RootState } from '../../store/store'
 import { selectDataById } from '../../services/cartSlice'
 
 interface NavigationProps {
-  panel: string
+  panel: 'header' | 'footer'
 }
 
 function Navigation({ panel }: NavigationProps) {
