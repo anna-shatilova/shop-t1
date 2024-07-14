@@ -6,8 +6,10 @@ import Rating from '../../components/raiting/Rating'
 import { useParams } from 'react-router-dom'
 import { calculateTotalPriceProduct, findProductQuantity } from '../../helpers/Helper'
 import { useState } from 'react'
-import { useGetCartUserByIdQuery } from '../../services/hook'
 import { useGetProductByIdQuery } from '../../services/productApi'
+import { RootState } from '../../store/store'
+import { selectDataById } from '../../services/cartSlice'
+import { useSelector } from 'react-redux'
 
 function ProductPage() {
   const { id } = useParams()
@@ -19,8 +21,9 @@ function ProductPage() {
     isLoading,
     error,
   } = useGetProductByIdQuery(paramsToNumber)
+
   const idUserForCart = 33
-  const { data: cartUserById } = useGetCartUserByIdQuery(idUserForCart)
+  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
   const cartUser = cartUserById?.carts[0]
 
 

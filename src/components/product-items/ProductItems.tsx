@@ -5,12 +5,11 @@ import {
   calculateTotalPriceProduct,
   findProductQuantity,
 } from '../../helpers/Helper'
-import { useGetCartUserByIdQuery } from '../../services/hook'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SerializedError } from '@reduxjs/toolkit'
-// import { useSelector } from 'react-redux'
-// import { selectDataById } from '../../services/cartSlice'
-// import { RootState } from '../../store/store'
+import { useSelector } from 'react-redux'
+import { selectDataById } from '../../services/cartSlice'
+import { RootState } from '../../store/store'
 
 interface IProps {
   allProducts: IAllProducts[] | undefined
@@ -20,12 +19,7 @@ interface IProps {
 
 const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
   const idUserForCart = 33
-  const { data: cartUserById } = useGetCartUserByIdQuery(idUserForCart) 
-  // const idUserForCart = 33
-  // const cartUserById = useSelector((state: RootState) =>
-  //   selectDataById(state, idUserForCart),
-  // )
-  // const cartUserById = useSelector((state: RootState) => state.cart.allCarts)
+  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
 
   const cartUser = cartUserById?.carts[0]
 

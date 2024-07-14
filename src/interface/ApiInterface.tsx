@@ -21,18 +21,3 @@ export interface ICartProducts {
   thumbnail: string
   quantity: number
 }
-
-// export interface CartUserById {
-//   carts: ICart[]
-// }
-
-// interface ICart {
-//   id: number
-//   products: ICartProducts[]
-//   userId: number
-//   total: number
-//   discountedTotal: number
-//   totalProducts: number
-//   totalQuantity: number
-// }
-

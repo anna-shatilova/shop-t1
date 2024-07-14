@@ -7,18 +7,14 @@ import Footer from '../../components/footer/Footer'
 import { handleScrollToAnchorCatalog } from '../../helpers/Helper'
 import { useGetProductsQuery } from '../../services/productApi'
 import ProductItems from '../../components/product-items/ProductItems'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { debounce } from 'lodash'
-import { useAppDispatch } from '../../store/store'
-import { fetchCartUserById } from '../../services/cartSlice'
-// import { useAppDispatch } from '../../store/store'
-// import { fetchCartUserById } from '../../services/cartSlice'
+import { useGetCartUserByIdQuery } from '../../services/hook'
 
 function MainPage() {
   const [countProduct, setCountProduct] = useState(12)
   const [searchText, setSearchText] = useState('')
   const [debouncedSearchText, setDebouncedSearchText] = useState('')
-  const dispatch = useAppDispatch()
 
   const {
     data: allProducts,
@@ -28,6 +24,10 @@ function MainPage() {
     limit: countProduct,
     search: debouncedSearchText,
   })
+  const idUserForCart = 33
+
+  const { data: cartUserById } = useGetCartUserByIdQuery(idUserForCart)
+  console.log(cartUserById)
 
   const debouncedHandlerSearchText = useCallback(
     debounce((value) => {
@@ -44,10 +44,6 @@ function MainPage() {
   const handlerAddMoreProducts = () => {
     setCountProduct(countProduct + 12)
   }
-  const idUserForCart = 33
-  useEffect(() => {
-    dispatch(fetchCartUserById(idUserForCart))
-  }, [idUserForCart, dispatch])
 
   return (
     <HelmetProvider>

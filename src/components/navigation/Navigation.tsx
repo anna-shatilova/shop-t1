@@ -5,9 +5,9 @@ import {
   handleScrollToAnchorCatalog,
   handleScrollToAnchorFQA,
 } from '../../helpers/Helper'
-// import { useSelector } from 'react-redux'
-// import { RootState } from '../../store/store'
-import { useGetCartUserByIdQuery } from '../../services/hook'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
+import { selectDataById } from '../../services/cartSlice'
 
 interface NavigationProps {
   panel: string
@@ -15,8 +15,7 @@ interface NavigationProps {
 
 function Navigation({ panel }: NavigationProps) {
   const idUserForCart = 33
-  const { data: cartUserById} = useGetCartUserByIdQuery(idUserForCart)
-  // const cartUserById = useSelector((state: RootState) => state.cart.allCarts)
+  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
 
   const cartUser = cartUserById?.carts[0]
 

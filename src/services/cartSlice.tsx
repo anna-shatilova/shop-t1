@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store/store'
 import { ICartProducts } from '../interface/ApiInterface'
 
@@ -31,11 +31,17 @@ type RequestState = 'pending' | 'fulfilled' | 'rejected'
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
+    allCarts: {},
     dataById: {} as Record<number, CartUserById | undefined>,
     statusById: {} as Record<number, RequestState | undefined>,
   },
-  reducers: {},
+  reducers: {
+    getCarts(state, action: PayloadAction<CartUserById>) {
+      state.allCarts = action.payload
+    },
+  },
   extraReducers: (builder) => {
+
     builder.addCase(fetchCartUserById.pending, (state, action) => {
       state.statusById[action.meta.arg] = 'pending'
     })
@@ -53,3 +59,5 @@ export const selectStatusById = (state: RootState, id: number) =>
   state.cart.statusById[id]
 export const selectDataById = (state: RootState, id: number) =>
   state.cart.dataById[id]
+export const { getCarts } = cartSlice.actions
+export const cartsReducer = cartSlice.reducer
