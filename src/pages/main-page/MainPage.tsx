@@ -69,6 +69,7 @@ function MainPage() {
                     onClick={handleScrollToAnchorCatalog}
                     label={'Go to shopping'}
                     mode={true}
+                    typeButton={"button"}
                   />
                 </Link>
               </div>

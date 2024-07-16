@@ -24,6 +24,7 @@ export const ButtonMP: Story = {
   args: {
     mode: true,
     label: 'Go to shopping',
+    typeButton: 'button',
   },
 }
 
@@ -31,6 +32,14 @@ export const ButtonPP: Story = {
   args: {
     mode: false,
     label: 'Add to cart',
+    typeButton: 'button',
+  },
+}
+export const ButtonLP: Story = {
+  args: {
+    mode: false,
+    label: 'Sign in',
+    typeButton: 'submit',
   },
 }
 

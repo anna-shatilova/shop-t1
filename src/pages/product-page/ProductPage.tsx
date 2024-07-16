@@ -161,7 +161,7 @@ function ProductPage() {
                       </button>
                     </div>
                   ) : (
-                    <Button label={'Add to cart'} mode={false} />
+                    <Button label={'Add to cart'} mode={false} typeButton={"button"}/>
                   )}
                 </div>
               </section>
