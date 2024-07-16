@@ -21,13 +21,13 @@ function Navigation({ panel }: NavigationProps) {
 
   return (
     <ul className={styles.ul}>
-      <Link to={'#catalog'}>
+      <Link to={'/#catalog'}>
         <li className={styles.li} onClick={handleScrollToAnchorCatalog}>
           Catalog
         </li>
       </Link>
 
-      <Link to={'#FQA'}>
+      <Link to={'/#FQA'}>
         <li className={styles.li} onClick={handleScrollToAnchorFQA}>
           FAQ
         </li>

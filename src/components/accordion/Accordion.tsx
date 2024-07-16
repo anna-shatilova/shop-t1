@@ -50,7 +50,7 @@ const Accordion = () => {
           >
             <div className={styles.question}>
               <span>{item.question}</span>
-              <button className={styles.toggle}>
+              <button className={styles.toggle} aria-label="open">
                 <svg
                   className={`${activeItems.includes(item) && styles.plusRotate}`}
                   width="25"

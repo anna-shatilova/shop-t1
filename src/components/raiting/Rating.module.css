@@ -2,7 +2,7 @@
   display: flex;
   gap: 4px;
 }
-svg {
+.svgRating {
   width: 20px;
   height: 20px;
 }

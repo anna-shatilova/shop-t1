@@ -1,11 +1,11 @@
-@keyframes rotate {
+/* @keyframes rotate {
   0% {
     transform: rotate(0);
   }
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 .loader {
   position: relative;
   width: 150px;
@@ -67,7 +67,7 @@
     opacity 0.3s,
     visibility 0.3s;
 }
-.imgContainer:hover .overlay {
+.product:hover .overlay {
   opacity: 1;
   visibility: visible;
 }
@@ -90,7 +90,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.productHeading:hover {
+.product:hover .productHeading {
   text-decoration: underline;
 }
 .productPrice {

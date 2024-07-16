@@ -10,7 +10,7 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
   for (let i = 0; i < 5; i++) {
     stars.push(
       <span key={i}>
-        <svg
+        <svg className={styles.svgRating}
           width="16"
           height="15"
           viewBox="0 0 16 15"

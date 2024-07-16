@@ -41,9 +41,9 @@ function ProductPage() {
       <main className={styles.wrapper}>
         <div className={styles.container}>
           {error ? (
-            <>Oh no, there was an error</>
+            <h1>Oh no, there was an error</h1>
           ) : isLoading ? (
-            <h3 className={styles.loading}>Loading...</h3>
+            <h1 className={styles.loading}>Loading...</h1>
           ) : product ? (
             <>
               <section className={styles.blockProductImg}>
@@ -86,10 +86,10 @@ function ProductPage() {
                     </div>
                   </div>
                 </div>
-                <h3 className={styles.productLimitation}>
+                <h2 className={styles.productLimitation}>
                   In Stock - Only {product.stock} left!
-                </h3>
-                <h6 className={styles.description}>{product.description}</h6>
+                </h2>
+                <h3 className={styles.description}>{product.description}</h3>
                 <div className={styles.termBlock}>
                   <p className={styles.termItem}>
                     {product.warrantyInformation}

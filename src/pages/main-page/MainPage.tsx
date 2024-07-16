@@ -84,12 +84,12 @@ function MainPage() {
               className={styles.inputSearch}
               type="text"
               placeholder="Search by title"
-              aria-label="поле ввода поиска"
+              aria-label="search input field"
             />
             {allProducts?.total === 0 && (
-              <h3 className={styles.noProducts}>
+              <h1 className={styles.noProducts}>
                 No products found. Try again.
-              </h3>
+              </h1>
             )}
             <ProductItems
               allProducts={allProducts?.products}

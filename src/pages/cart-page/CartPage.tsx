@@ -25,9 +25,9 @@ function CartPage() {
         <div className={styles.container}>
           <h1 className={styles.title}>My cart</h1>
           {isError ? (
-            <>Oh no, there was an error</>
+            <h1>Oh no, there was an error</h1>
           ) : isLoading ? (
-            <>Loading...</>
+            <h1>Loading...</h1>
           ) : cartUser && cartUserProducts ? (
             <section className={styles.cartContainer}>
               <ul className={styles.cartList}>
@@ -41,17 +41,17 @@ function CartPage() {
                       />
                       <div>
                         <Link to={`/product/${product.id}`}>
-                          <h3 className={styles.itemHeading}>
+                          <h1 className={styles.itemHeading}>
                             {product.title}
-                          </h3>
+                          </h1>
                         </Link>
-                        <h4 className={styles.itemPrice}>
+                        <h2 className={styles.itemPrice}>
                           {calculateTotalPriceProduct(
                             product.price,
                             product.discountPercentage,
                           )}{' '}
                           $
-                        </h4>
+                        </h2>
                       </div>
                     </div>
                     <div className={styles.cartButtonBlock}>
@@ -139,7 +139,7 @@ function CartPage() {
               />
             </section>
           ) : (
-            <h3 className={styles.noItems}>No items</h3>
+            <h2 className={styles.noItems}>No items</h2>
           )}
         </div>
       </main>

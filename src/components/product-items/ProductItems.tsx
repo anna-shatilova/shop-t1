@@ -28,9 +28,9 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
   return (
     <>
       {error ? (
-        <>Oh no, there was an error</>
+        <h1>Oh no, there was an error</h1>
       ) : isLoading ? (
-        <div className={styles.loader}>Loading...</div>
+        <h1 className={styles.loader}>Loading...</h1>
       ) : allProducts ? (
         <div className={styles.productBlock}>
           {allProducts.map((product) => (
@@ -42,7 +42,7 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
                 <img
                   src={product.thumbnail}
                   alt="sneakers"
-                  aria-label="Essence Mascara Lash Princess"
+                  aria-label="main foto of product"
                   className={styles.productImg}
                 />
                 <div className={styles.overlay}>Show details</div>
@@ -57,14 +57,14 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
                   className={styles.headingBlock}
                   onClick={() => navigate(`/product/${product.id}`)}
                 >
-                  <h3 className={styles.productHeading}>{product.title}</h3>
-                  <p className={styles.productPrice}>
+                  <h2 className={styles.productHeading}>{product.title}</h2>
+                  <h3 className={styles.productPrice}>
                     {calculateTotalPriceProduct(
                       product.price,
                       product.discountPercentage,
                     )}{' '}
                     $
-                  </p>
+                  </h3>
                 </div>
                 {findProductQuantity(product.id, cartUser?.products) ? (
                   <div className={styles.buttonBlock}>

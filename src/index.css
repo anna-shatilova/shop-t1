@@ -11,18 +11,10 @@
 
 @font-face {
   font-family: 'Jost';
-  src: url('/fonts/Jost/Jost-Regular.ttf') format ("ttf");
+  src: url('https://fonts.gstatic.com/s/jost/v30/92zl-49zl.woff2')
+    format('woff2');
   font-style: normal;
 }
-
-/* @font-face {
-  font-family: "StratosSkyeng";
-  src: local("StratosSkyeng"), local("StratosSkyeng"),
-    url("/fonts/StratosSkyeng.woff2") format("woff2"),
-    url("/fonts/StratosSkyeng.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-} */
 
 a,
 a:visited {
@@ -59,7 +51,6 @@ button {
 ul li {
   list-style: none;
 }
-
 
 /* @media (prefers-color-scheme: light) {
   :root {
