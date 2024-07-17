@@ -37,7 +37,7 @@ function ProductPage() {
       <Helmet>
         <title>{`product?.title`} | Goods4you</title>
       </Helmet>
-      <Header />
+      <Header isLogin={false}/>
       <main className={styles.wrapper}>
         <div className={styles.container}>
           {error ? (

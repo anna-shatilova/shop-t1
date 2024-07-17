@@ -20,7 +20,7 @@ function CartPage() {
       <Helmet>
         <title>My cart | Goods4you</title>
       </Helmet>
-      <Header />
+      <Header isLogin={false}/>
       <main className={styles.wrapper}>
         <div className={styles.container}>
           <h1 className={styles.title}>My cart</h1>

@@ -15,7 +15,9 @@ interface NavigationProps {
 
 function Navigation({ panel }: NavigationProps) {
   const idUserForCart = 33
-  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
+  const cartUserById = useSelector((state: RootState) =>
+    selectDataById(state, idUserForCart),
+  )
 
   const cartUser = cartUserById?.carts[0]
 

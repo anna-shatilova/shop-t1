@@ -2,83 +2,96 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Header from '../../components/header/Header'
 import styles from './LoginPage.module.css'
 import Button from '../../components/button/Button'
-import { useEffect, useState } from 'react'
+import { useId, useState } from 'react'
+import { useGetTokenMutation } from '../../services/userApi'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { IUserLogin } from '../../interface/ApiInterface'
+// import { useAppDispatch } from '../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 function LoginPage() {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-  const [inputError, setInputError] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handlerSubmitForm = async () => {
-    try {
-      if (!login) {
-        setInputError('Enter login')
-        return
-      }
-      if (!password) {
-        setInputError('Enter password')
-        return
-      }
-      //   await getTokens({ login, password }).then((tokensData) => {
-      //     if (tokensData.error?.status === 401) {
-      //       setInputError('Неправильный пароль')
-      //       return
-      //     } else {
-      //       dispatch(
-      //         setAuth({
-      //           access_token: tokensData.data.access_token,
-      //           refresh_token: tokensData.data.refresh_token,
-      //           isAuth: true,
-      //         }),
-      //       )
+  const [getToken, { isLoading }] = useGetTokenMutation()
 
-      //       navigate('/profile', { replace: true })
-      //     }
-      //   })
-    } catch (error) {
-      // setInputError(error.message)
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserLogin>()
+
+  const form = useId()
+  //   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
+    await getToken(data)
+      .unwrap()
+      .then((fulfilled) => {
+        localStorage.setItem('access_token', fulfilled.token)
+
+        navigate('/')
+      })
+      .catch((rejected) => {
+        if (rejected.status === 400) {
+          setErrorMessage('Incorrect login or password')
+        }
+        if (rejected.status === 500) {
+          setErrorMessage('Server is not available')
+        }
+
+        return
+      })
+
+    // dispatch(setUser(data.email))
   }
-  
-  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
-  useEffect(() => {
-    setInputError('')
-  }, [login, password])
+
 
   return (
     <HelmetProvider>
       <Helmet>
         <title>Sign in | Goods4you</title>
       </Helmet>
-      <Header />
+      <Header isLogin={true} />
       <main className={styles.wrapper}>
         <div className={styles.container}>
-          <h1 className={styles.loginHeading}>Sign in</h1>
-          <form className={styles.form} action="/login" method="">
-            <input
-              className={styles.input}
-              type="text"
-              name="login"
-              placeholder="Login"
-              value={login}
-              onChange={(e) => setLogin(e.target.value)}
-            />
-            <input
-              className={styles.input}
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {inputError && <h2 className={styles.inputError}>{inputError}</h2>}
-            <Button
-              onClick={handlerSubmitForm}
-              typeButton={'submit'}
-              label={'Sign in'}
-              mode={false}
-            />
-          </form>
+          {isLoading ? (
+            <h1 className={styles.loading}>Loading...</h1>
+          ) : (
+            <>
+              <h1 className={styles.loginHeading}>Sign in</h1>
+              <form
+                id={form}
+                className={styles.form}
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <input
+                  {...register('login', { required: true })}
+                  className={styles.input}
+                  type="text"
+                  name="login"
+                  placeholder="Login"
+                />
+                <input
+                  {...register('password', { required: true })}
+                  className={styles.input}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                {errors.login && (
+                  <h2 className={styles.inputError}>Login is required</h2>
+                )}
+                {errors.password && (
+                  <h2 className={styles.inputError}>Password is required</h2>
+                )}
+                {errorMessage && (
+                  <h2 className={styles.inputError}>{errorMessage}</h2>
+                )}
+                <Button typeButton={'submit'} label={'Sign in'} mode={false} />
+              </form>
+            </>
+          )}
         </div>
       </main>
     </HelmetProvider>

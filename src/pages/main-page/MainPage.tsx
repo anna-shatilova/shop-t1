@@ -11,6 +11,7 @@ import { useCallback, useState } from 'react'
 import { debounce } from 'lodash'
 import { useGetCartUserByIdQuery } from '../../services/hook'
 import { Button } from '../../components/button/Button'
+// import { useGetCurrentUserQuery } from '../../services/userApi'
 
 function MainPage() {
   const [countProduct, setCountProduct] = useState(12)
@@ -25,6 +26,17 @@ function MainPage() {
     limit: countProduct,
     search: debouncedSearchText,
   })
+  // interface IToken {
+  //   token: string | null
+  // }
+  
+  // function getAuthFromLocalStorage(): IToken {
+  //   const token = localStorage.getItem('access_token');
+  //   return token ? { token: JSON.parse(token) } : { token: null };
+  // }
+  //   const token = getAuthFromLocalStorage()
+  // const [getCurrentUser] = useGetCurrentUserQuery(token.token)
+
   const idUserForCart = 33
 
   const { data: cartUserById } = useGetCartUserByIdQuery(idUserForCart)
@@ -52,7 +64,7 @@ function MainPage() {
         <Helmet>
           <title>Catalog | Goods4you</title>
         </Helmet>
-        <Header />
+        <Header isLogin={false} />
         <main>
           <section className={styles.top}>
             <div className={styles.containerTop}>
@@ -69,7 +81,7 @@ function MainPage() {
                     onClick={handleScrollToAnchorCatalog}
                     label={'Go to shopping'}
                     mode={true}
-                    typeButton={"button"}
+                    typeButton={'button'}
                   />
                 </Link>
               </div>

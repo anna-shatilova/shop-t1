@@ -21,3 +21,7 @@ export interface ICartProducts {
   thumbnail: string
   quantity: number
 }
+export interface IUserLogin {
+  login: string
+  password: string
+}
