@@ -4,11 +4,6 @@ import { IUserLogin } from '../interface/ApiInterface'
 interface IToken {
   token: string
 }
-// interface ICurrentUser {
-//   id: number
-//   firstName: string
-//   lastName: string
-// }
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -29,15 +24,6 @@ export const userApi = createApi({
         }),
       }),
     }),
-    // getCurrentUser: build.query<ICurrentUser, IToken>({
-    //   query: (token) => ({
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     url: 'auth/me',
-    //     method: 'GET',
-    //   }),
-    // }),
   }),
 })
 
