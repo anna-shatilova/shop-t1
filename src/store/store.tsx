@@ -3,10 +3,11 @@ import { cartSlice } from '../services/cartSlice'
 import { useDispatch } from 'react-redux'
 import { productApi } from '../services/productApi'
 import { userApi } from '../services/userApi'
+import { authReducer } from '../services/authSlice'
 
 export const store = configureStore({
   reducer: {
-    // auth: authReducer,
+    auth: authReducer,
     cart: cartSlice.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [userApi.reducerPath]: userApi.reducer,

@@ -7,11 +7,15 @@ import {
 } from './cartSlice'
 import { RootState, useAppDispatch } from '../store/store'
 
-export function useGetCartUserByIdQuery(id: number) {
+export function useGetCartUserByIdQuery(id: number | undefined) {
   const dispatch = useAppDispatch()
-  const status = useSelector((state: RootState) => selectStatusById(state, id))
-  const data = useSelector((state: RootState) => selectDataById(state, id))
+  const status = useSelector((state: RootState) => selectStatusById(state))
+  const data = useSelector((state: RootState) => selectDataById(state))
+
   useEffect(() => {
+    if (!id) {
+      return
+    }
     if (status === undefined) {
       dispatch(fetchCartUserById(id))
     }

@@ -11,7 +11,6 @@ import {
 import { useState } from 'react'
 import { useGetProductByIdQuery } from '../../services/productApi'
 import { RootState } from '../../store/store'
-import { selectDataById } from '../../services/cartSlice'
 import { useSelector } from 'react-redux'
 import Button from '../../components/button/Button'
 
@@ -26,11 +25,16 @@ function ProductPage() {
     error,
   } = useGetProductByIdQuery(paramsToNumber)
 
-  const idUserForCart = 33
-  const cartUserById = useSelector((state: RootState) =>
-    selectDataById(state, idUserForCart),
-  )
-  const cartUser = cartUserById?.carts[0]
+  const cartUserById = useSelector((state: RootState) => {
+    if (state.cart.dataById) {
+      return state.cart.dataById
+    } else {
+      return null
+    }
+  })
+
+
+  const cartUser = cartUserById?.carts?.[0]
 
   return (
     <HelmetProvider>

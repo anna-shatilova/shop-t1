@@ -6,7 +6,6 @@ import { useId, useState } from 'react'
 import { useGetTokenMutation } from '../../services/userApi'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IUserLogin } from '../../interface/ApiInterface'
-// import { useAppDispatch } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
 
 function LoginPage() {
@@ -21,7 +20,6 @@ function LoginPage() {
   } = useForm<IUserLogin>()
 
   const form = useId()
-  //   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
@@ -42,10 +40,7 @@ function LoginPage() {
 
         return
       })
-
-    // dispatch(setUser(data.email))
   }
-
 
   return (
     <HelmetProvider>

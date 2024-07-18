@@ -40,18 +40,18 @@ const baseQueryWithAuth: BaseQueryFn<
   })
 
   const result = await baseQuery(args, api, extraOptions)
-  console.log('Результат первого запроса', { result })
+  // console.log('Результат первого запроса', { result })
 
   const forceLogout = () => {
-    console.log('Принудительная авторизация!')
+    // console.log('Принудительная авторизация!')
     localStorage.removeItem('access_token')
     window.location.replace('/login')
   }
 
-  if (result?.error?.status !== 403) {
+  if (result?.error?.status !== 403 && result?.error?.status !== 401) {
     return result as any
   }
-  if (result?.error?.status === 403) {
+  if (result?.error?.status === 403 || result?.error?.status === 401) {
     return forceLogout() as void
   }
 }

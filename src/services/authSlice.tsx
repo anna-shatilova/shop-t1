@@ -1,55 +1,33 @@
-// import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// function getAuthFromLocalStorage(): { token: string } | null {
-//     const token = localStorage.getItem('access_token');
-//     return token ? JSON.parse(token) : null;
-//   }
-// interface IUserSlice {
-//     id: number,
-//     firstName: string,
-//     lastName: string,
-//   }
-  
-//   const initialState: IUserSlice = {
-//       id: 0,
-//       firstName: '',
-//       lastName: '',
-//       token: getAuthFromLocalStorage | null
-//   }
-  
-//   const currentUserSlice = createSlice({
-//     name: 'currentUser',
-//     initialState: initialState,
-  
-//     reducers: {
-//       setCurrentUser(state, action: PayloadAction<IUserSlice>) {
-//         const payload = action.payload ?? initialState
-//         state. = payload
-//       },
-//     },
-//   })
-  
-//   export const { choiseUser } = profileSlice.actions
+interface IUserSlice {
+  id: number |undefined
+  firstName: string | undefined
+  lastName: string | undefined
+  isAuth: boolean 
+}
 
-// const initialState: Current= {
-//   access_token: '',
-//   id: 
-// }
+const initialState: IUserSlice = {
+  id: 0,
+  firstName: '',
+  lastName: '',
+  isAuth: false,
+}
 
-// const authSlice = createSlice({
-//   name: 'auth',
-//   initialState: getAuthFromLocalStorage() ?? initialState,
-//   reducers: {
-//     setAuth(state, action) {
-//       const payload = action.payload ?? initialState
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: initialState,
 
-//       state.access_token = payload.access_token
-//       state.refresh_token = payload.refresh_token
-//       state.isAuth = payload.isAuth
+  reducers: {
+    setAuth(state, action: PayloadAction<IUserSlice>) {
+      const payload = action.payload ?? initialState
+      state.id = payload.id
+      state.firstName = payload.firstName
+      state.lastName = payload.lastName
+      state.isAuth = payload.isAuth
+    },
+  },
+})
 
-//       localStorage.setItem(AUTH_KEY, JSON.stringify(state))
-//     },
-//   },
-// })
-// export const { setAuth } = authSlice.actions
-// export const authReducer = authSlice.reducer
+export const { setAuth } = authSlice.actions
+export const authReducer = authSlice.reducer

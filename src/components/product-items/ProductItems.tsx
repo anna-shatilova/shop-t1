@@ -8,7 +8,7 @@ import {
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SerializedError } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
-import { selectDataById } from '../../services/cartSlice'
+// import { selectDataById } from '../../services/cartSlice'
 import { RootState } from '../../store/store'
 
 interface IProps {
@@ -18,9 +18,13 @@ interface IProps {
 }
 
 const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
-  const idUserForCart = 33
-  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
-
+  const cartUserById = useSelector((state: RootState) => {
+    if (state.cart.dataById) {
+      return state.cart.dataById
+    } else {
+      return null
+    }
+  })
   const cartUser = cartUserById?.carts[0]
 
   const navigate = useNavigate()
@@ -30,7 +34,7 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
       {error ? (
         <h1>Oh no, there was an error</h1>
       ) : isLoading ? (
-        <h1 className={styles.loader}>Loading...</h1>
+        <h1 className={styles.loader}>Loading products...</h1>
       ) : allProducts ? (
         <div className={styles.productBlock}>
           {allProducts.map((product) => (

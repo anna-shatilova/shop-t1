@@ -7,19 +7,21 @@ import {
 } from '../../helpers/Helper'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
-import { selectDataById } from '../../services/cartSlice'
 
 interface NavigationProps {
   panel: 'header' | 'footer'
 }
 
 function Navigation({ panel }: NavigationProps) {
-  const idUserForCart = 33
-  const cartUserById = useSelector((state: RootState) =>
-    selectDataById(state, idUserForCart),
-  )
-
-  const cartUser = cartUserById?.carts[0]
+  const { firstName, lastName } = useSelector((state: RootState) => state.auth)
+  const cartUserById = useSelector((state: RootState) => {
+    if (state.cart.dataById) {
+      return state.cart.dataById
+    } else {
+      return null
+    }
+  })
+  const cartUser = cartUserById?.carts?.[0]
 
   return (
     <ul className={styles.ul}>
@@ -48,7 +50,7 @@ function Navigation({ panel }: NavigationProps) {
               )}
             </div>
           </Link>
-          <li className={styles.liAvatar}>Johnson Smith</li>
+          <li className={styles.liAvatar}>{firstName} {lastName}</li>
         </>
       )}
     </ul>

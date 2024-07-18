@@ -4,14 +4,23 @@ import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import { Link } from 'react-router-dom'
 import TableTotalPrice from '../../components/table/TableTotalPrice'
-import { useGetCartUserByIdQuery } from '../../services/hook'
 import { calculateTotalPriceProduct, pluralizeItem } from '../../helpers/Helper'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
 
 function CartPage() {
-  const idUserForCart = 33
-  const { data: cartUserById, isError, isLoading } = useGetCartUserByIdQuery(idUserForCart)
-  
-  const cartUser = cartUserById?.carts[0]
+  // const idUserForCart = 33
+  // const { data: cartUserById, isError, isLoading } = useGetCartUserByIdQuery(idUserForCart)
+
+  const cartUserById = useSelector((state: RootState) => {
+    if (state.cart.dataById) {
+      return state.cart.dataById
+    } else {
+      return null
+    }
+  })
+
+  const cartUser = cartUserById?.carts?.[0]
 
   const cartUserProducts = cartUser?.products
 
@@ -20,15 +29,16 @@ function CartPage() {
       <Helmet>
         <title>My cart | Goods4you</title>
       </Helmet>
-      <Header isLogin={false}/>
+      <Header isLogin={false} />
       <main className={styles.wrapper}>
         <div className={styles.container}>
           <h1 className={styles.title}>My cart</h1>
-          {isError ? (
+          {/* {isError ? (
             <h1>Oh no, there was an error</h1>
           ) : isLoading ? (
             <h1>Loading...</h1>
-          ) : cartUser && cartUserProducts ? (
+          ) : */}
+          {cartUser && cartUserProducts ? (
             <section className={styles.cartContainer}>
               <ul className={styles.cartList}>
                 {cartUser.products.map((product) => (

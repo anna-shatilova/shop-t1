@@ -104,7 +104,6 @@
 .priceContent {
   display: flex;
   gap: 24px;
-  padding: 0 11px;
 }
 .priceDiscount {
   font-size: 36px;
@@ -137,6 +136,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 254px;
 }
 .buttonCount {
   width: 70px;

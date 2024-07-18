@@ -12,19 +12,26 @@ import {
 import ProductItems from '../../components/product-items/ProductItems'
 import { useCallback, useState } from 'react'
 import { debounce } from 'lodash'
-// import { useGetCartUserByIdQuery } from '../../services/hook'
 import { Button } from '../../components/button/Button'
-// import { useGetCurrentUserQuery } from '../../services/userApi'
+import { useAppDispatch } from '../../store/store'
+import { setAuth } from '../../services/authSlice'
 
 function MainPage() {
   const [countProduct, setCountProduct] = useState(12)
   const [searchText, setSearchText] = useState('')
   const [debouncedSearchText, setDebouncedSearchText] = useState('')
+  const dispatch = useAppDispatch()
 
   const { data: currentUser, isLoading: loadingAuth } =
     useGetCurrentUserQuery('')
-  console.log(currentUser)
-
+  dispatch(
+    setAuth({
+      id: currentUser?.id,
+      firstName: currentUser?.firstName,
+      lastName: currentUser?.lastName,
+      isAuth: true,
+    }),
+  )
   const {
     data: allProducts,
     isLoading,
@@ -34,15 +41,7 @@ function MainPage() {
     search: debouncedSearchText,
   })
 
-  // useEffect(() => {
-  //   if (currentUser) dispatch(setUserData(currentUser))
-  // }, [currentUser, getUser])
-
-  // const idUserForCart = currentUser?.id
-
-  // const { data: cartUserById } =
-  //   useGetCartUserByIdQuery(idUserForCart)
-  // console.log(cartUserById)
+  // const idUserForCart = currentUser && currentUser.id
 
   const debouncedHandlerSearchText = useCallback(
     debounce((value) => {
@@ -50,7 +49,6 @@ function MainPage() {
     }, 500),
     [],
   )
-
   const handlerSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.currentTarget.value)
     debouncedHandlerSearchText(event.currentTarget.value)
@@ -67,7 +65,7 @@ function MainPage() {
           <title>Catalog | Goods4you</title>
         </Helmet>
         {loadingAuth ? (
-          <h1>Loading...</h1>
+          <h1 className={styles.loader}>Loading...</h1>
         ) : (
           <>
             <Header isLogin={false} />
