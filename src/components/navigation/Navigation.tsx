@@ -14,14 +14,9 @@ interface NavigationProps {
 
 function Navigation({ panel }: NavigationProps) {
   const { firstName, lastName } = useSelector((state: RootState) => state.auth)
-  const cartUserById = useSelector((state: RootState) => {
-    if (state.cart.dataById) {
-      return state.cart.dataById
-    } else {
-      return null
-    }
+  const cartUser = useSelector((state: RootState) => {
+    if (state.cart.dataById) return state.cart.dataById
   })
-  const cartUser = cartUserById?.carts?.[0]
 
   return (
     <ul className={styles.ul}>
@@ -50,7 +45,9 @@ function Navigation({ panel }: NavigationProps) {
               )}
             </div>
           </Link>
-          <li className={styles.liAvatar}>{firstName} {lastName}</li>
+          <li className={styles.liAvatar}>
+            {firstName} {lastName}
+          </li>
         </>
       )}
     </ul>

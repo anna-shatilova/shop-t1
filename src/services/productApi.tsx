@@ -31,7 +31,6 @@ const baseQueryWithAuth: BaseQueryFn<
     baseUrl: 'https://dummyjson.com/',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('access_token')
-      console.log('Использую токен из стора', { token })
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
       }
@@ -40,10 +39,8 @@ const baseQueryWithAuth: BaseQueryFn<
   })
 
   const result = await baseQuery(args, api, extraOptions)
-  // console.log('Результат первого запроса', { result })
 
   const forceLogout = () => {
-    // console.log('Принудительная авторизация!')
     localStorage.removeItem('access_token')
     window.location.replace('/login')
   }
@@ -60,7 +57,6 @@ export const productApi = createApi({
   reducerPath: 'productApi',
   tagTypes: ['product'],
   baseQuery: baseQueryWithAuth,
-  // fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
   endpoints: (build) => ({
     getProducts: build.query<IDataProducts, IPaginAndSearch>({
       query: ({ limit, search }) => ({

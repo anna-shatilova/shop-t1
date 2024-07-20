@@ -3,23 +3,8 @@ import NotFound from './pages/not-found/NotFound'
 import MainPage from './pages/main-page/MainPage'
 import ProductPage from './pages/product-page/ProductPage'
 import CartPage from './pages/cart-page/CartPage'
-// import LoginPage from './pages/login-page/LoginPage'
 import { ProtectedRoute } from './components/protected-route/ProtectedRoute'
-import { useSelector } from 'react-redux'
-import { RootState, useAppDispatch } from './store/store'
-import { useEffect } from 'react'
-import { fetchCartUserById } from './services/cartSlice'
-
-function AppRoutes() {
-  const dispatch = useAppDispatch()
-
-  const user = useSelector((state: RootState) => state.auth.isAuth)
-  const userId = useSelector((state: RootState) => state.auth.id)
-
-  useEffect(() => {
-    dispatch(fetchCartUserById(userId))
-  }, [dispatch, userId])
-
+function AppRoutes({user}: {user: boolean}) {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />

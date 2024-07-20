@@ -113,6 +113,10 @@
   background: #f14f4f;
   color: #ffffff;
 }
+.buttonCount:disabled {
+  background: #f8afaf;
+}
+
 .counter {
   font-size: 14px;
   font-weight: 400;
@@ -128,4 +132,10 @@
 }
 .productButton:hover {
   background: #8c2828;
+}
+.error {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #f14f4f;
 }

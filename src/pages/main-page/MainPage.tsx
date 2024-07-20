@@ -10,7 +10,7 @@ import {
   useGetProductsQuery,
 } from '../../services/productApi'
 import ProductItems from '../../components/product-items/ProductItems'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash'
 import { Button } from '../../components/button/Button'
 import { useAppDispatch } from '../../store/store'
@@ -24,14 +24,20 @@ function MainPage() {
 
   const { data: currentUser, isLoading: loadingAuth } =
     useGetCurrentUserQuery('')
-  dispatch(
-    setAuth({
-      id: currentUser?.id,
-      firstName: currentUser?.firstName,
-      lastName: currentUser?.lastName,
-      isAuth: true,
-    }),
-  )
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(
+        setAuth({
+          id: currentUser?.id,
+          firstName: currentUser?.firstName,
+          lastName: currentUser?.lastName,
+          isAuth: true,
+        }),
+      )
+    }
+  }, [currentUser, dispatch])
+
   const {
     data: allProducts,
     isLoading,
@@ -40,8 +46,6 @@ function MainPage() {
     limit: countProduct,
     search: debouncedSearchText,
   })
-
-  // const idUserForCart = currentUser && currentUser.id
 
   const debouncedHandlerSearchText = useCallback(
     debounce((value) => {

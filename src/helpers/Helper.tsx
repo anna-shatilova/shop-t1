@@ -1,4 +1,4 @@
-import { ICartProducts } from "../interface/ApiInterface"
+import { ICartProducts } from '../interface/ApiInterface'
 
 export const handleScrollToAnchorCatalog = () => {
   const anchorCatalog = document.getElementById('catalog')
@@ -14,7 +14,6 @@ export const handleScrollToAnchorFQA = () => {
   }
 }
 
-
 export const calculateTotalPriceProduct = (
   initialPrice: number,
   discountPercentage: number,
@@ -25,7 +24,7 @@ export const calculateTotalPriceProduct = (
   return finalPrice.toFixed(2)
 }
 
-export const pluralizeItem = (count: number): string => {
+export const pluralizeItem = (count: number | undefined): string => {
   if (count === 1) {
     return 'item'
   } else {
@@ -35,13 +34,14 @@ export const pluralizeItem = (count: number): string => {
 
 export const findProductQuantity = (
   productId: number,
-  productsByCart: ICartProducts[] | undefined,
-): number | undefined => {
-  if (!productsByCart) return undefined
+  productsByCart: ICartProducts[],
+): number => {
+  if (!productsByCart) return 0
 
   for (const product of productsByCart) {
     if (product.id === productId) {
       return product.quantity
     }
-  }  
+  }
+  return 0
 }

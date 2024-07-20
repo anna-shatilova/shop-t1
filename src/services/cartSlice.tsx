@@ -1,23 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../store/store'
 import { ICartProducts } from '../interface/ApiInterface'
 
-type CartUserById = {
-  carts: {
-    id: number
-    products: ICartProducts[]
-    userId: number
-    total: number
-    discountedTotal: number
-    totalProducts: number
-    totalQuantity: number
-  }[]
+export interface ICartState {
+  id: number
+  products: ICartProducts[]
+  userId: number
+  total: number
+  discountedTotal: number
+  totalProducts: number
+  totalQuantity: number
 }
-
 type RequestState = 'pending' | 'fulfilled' | 'rejected'
 
 export const fetchCartUserById = createAsyncThunk<
-  CartUserById,
+  ICartState,
   number | undefined
 >('cart/fetchCartUserById', async (id, { rejectWithValue }) => {
   if (!id) {
@@ -28,36 +24,77 @@ export const fetchCartUserById = createAsyncThunk<
   if (response.status < 200 || response.status >= 300) {
     return rejectWithValue(data)
   }
-  return data
+  return data.carts[0]
 })
+interface IUpdateCartUserProps {
+  idCart: number
+  idProduct: number
+  quantityProduct: number
+  cartUser: ICartState
+}
 
-export const CartUserById = createAsyncThunk<
-  CartUserById,
-  number | undefined
->('cart/fetchCartUserById', async (id, { rejectWithValue }) => {
-  if (!id) {
-    return
-  }
-  const response = await fetch(`https://dummyjson.com/carts/user/${id}`)
-  const data = await response.json()
-  if (response.status < 200 || response.status >= 300) {
-    return rejectWithValue(data)
-  }
-  return data
-})
+export const updateCartUser = createAsyncThunk<
+  ICartState,
+  IUpdateCartUserProps
+>(
+  'cart/updateCartUser',
+  async (
+    { idCart, idProduct, quantityProduct, cartUser },
+    { rejectWithValue },
+  ) => {
+    const productsMap = cartUser.products.map((product) => {
+      if (product.id === idProduct) {
+        return {
+          id: product.id,
+          quantity: quantityProduct,
+        }
+      }
 
+      return {
+        id: product.id,
+        quantity: product.quantity,
+      }
+    })
+    const isProductInCart = cartUser.products.some(
+      (product) => product.id === idProduct,
+    )
+    if (!isProductInCart) {
+      productsMap.push({ id: idProduct, quantity: quantityProduct })
+    }
+    console.log('productsMap', productsMap)
+
+    const response = await fetch(`https://dummyjson.com/carts/${idCart}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        merge: false,
+        products: productsMap,
+      }),
+    })
+    const data = await response.json()
+
+    if (response.status < 200 || response.status >= 300) {
+      return rejectWithValue(data)
+    }
+    return data
+  },
+)
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    // allCarts: {},
-    dataById: {} as CartUserById,
+    dataById: {} as ICartState,
     statusById: {} as RequestState,
   },
   reducers: {
-    // getCarts(state, action: PayloadAction<CartUserById>) {
-    //   state.allCarts = action.payload
-    // },
+    increment: (state) => {
+      state.dataById.totalQuantity += 1
+    },
+    decrement: (state) => {
+      state.dataById.totalQuantity -= 1
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCartUserById.pending, (state) => {
@@ -70,21 +107,21 @@ export const cartSlice = createSlice({
     builder.addCase(fetchCartUserById.rejected, (state) => {
       state.statusById = 'rejected'
     })
+    builder.addCase(updateCartUser.pending, (state) => {
+      state.statusById = 'pending'
+    })
+    builder.addCase(updateCartUser.fulfilled, (state, action) => {
+      state.statusById = 'fulfilled'
+      state.dataById = action.payload
+    })
+    builder.addCase(updateCartUser.rejected, (state) => {
+      state.statusById = 'rejected'
+    })
   },
 })
 
-export const selectStatusById = (state: RootState) => state.cart.statusById
-export const selectDataById = (state: RootState) => state.cart.dataById
-// export const { getCarts } = cartSlice.actions
+// export const selectStatusById = (state: RootState) => state.cart.statusById
+// export const selectDataById = (state: RootState) => state.cart.dataById
+export const { increment, decrement } = cartSlice.actions
 export const cartsReducer = cartSlice.reducer
 
-// extraReducers(builder) {
-//   builder.addCase(fetchGetTodos.fulfilled, (state, action) => {
-//       state.todos = action.payload;
-//   })
-// }
-// extraReducers: {
-//   [fetchGetTodos.fulfilled]: (state, action) => {
-//       state.todos = action.payload;
-//   }
-// }

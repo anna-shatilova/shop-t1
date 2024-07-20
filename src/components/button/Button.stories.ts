@@ -28,13 +28,6 @@ export const ButtonMP: Story = {
   },
 }
 
-export const ButtonPP: Story = {
-  args: {
-    mode: false,
-    label: 'Add to cart',
-    typeButton: 'button',
-  },
-}
 export const ButtonLP: Story = {
   args: {
     mode: false,

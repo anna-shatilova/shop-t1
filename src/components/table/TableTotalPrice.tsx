@@ -1,16 +1,24 @@
+import { useSelector } from 'react-redux'
 import { pluralizeItem } from '../../helpers/Helper'
 import styles from './TableTotalPrice.module.css'
+import { RootState } from '../../store/store'
 
 interface PropsTable {
-  totalProducts: number
   total: number
   discountedTotal: number
 }
 const TableTotalPrice: React.FC<PropsTable> = ({
-  totalProducts,
   discountedTotal,
   total,
 }) => {
+  const cartUser = useSelector((state: RootState) => {
+    if (state.cart.dataById) return state.cart.dataById
+  })
+
+  const filteredProducts = cartUser?.products.filter(
+    (product) => product.quantity !== 0,
+  )
+const totalProductsCount = filteredProducts?.length
   return (
     <table role="table" aria-label="Total price">
       <tbody role="rowgroup">
@@ -19,7 +27,7 @@ const TableTotalPrice: React.FC<PropsTable> = ({
             Total count
           </td>
           <td role="cell" className={styles.count}>
-            {totalProducts} {pluralizeItem(totalProducts)}
+            {totalProductsCount} {pluralizeItem(totalProductsCount)}
           </td>
         </tr>
         <tr role="row">

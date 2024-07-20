@@ -4,12 +4,13 @@ import styles from './ProductItems.module.css'
 import {
   calculateTotalPriceProduct,
   findProductQuantity,
+  pluralizeItem,
 } from '../../helpers/Helper'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SerializedError } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
-// import { selectDataById } from '../../services/cartSlice'
-import { RootState } from '../../store/store'
+import { RootState, useAppDispatch } from '../../store/store'
+import { ICartState, updateCartUser } from '../../services/cartSlice'
 
 interface IProps {
   allProducts: IAllProducts[] | undefined
@@ -18,16 +19,21 @@ interface IProps {
 }
 
 const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
-  const cartUserById = useSelector((state: RootState) => {
-    if (state.cart.dataById) {
-      return state.cart.dataById
-    } else {
-      return null
-    }
+  const cartUser = useSelector((state: RootState) => {
+    if (state.cart.dataById) return state.cart.dataById
   })
-  const cartUser = cartUserById?.carts[0]
-
+  const status = useSelector((state: RootState) => state.cart.statusById)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const handlerCounterItems = (
+    idCart: number,
+    idProduct: number,
+    quantityProduct: number,
+    cartUser: ICartState,
+  ) => {
+    dispatch(updateCartUser({ idCart, idProduct, quantityProduct, cartUser }))
+  }
 
   return (
     <>
@@ -35,7 +41,7 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
         <h1>Oh no, there was an error</h1>
       ) : isLoading ? (
         <h1 className={styles.loader}>Loading products...</h1>
-      ) : allProducts ? (
+      ) : allProducts && cartUser ? (
         <div className={styles.productBlock}>
           {allProducts.map((product) => (
             <section className={styles.product} key={product.id}>
@@ -54,7 +60,7 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
               <div className={styles.productContext}>
                 <div
                   style={{
-                    width: findProductQuantity(product.id, cartUser?.products)
+                    width: findProductQuantity(product.id, cartUser.products)
                       ? '50%'
                       : '',
                   }}
@@ -70,9 +76,21 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
                     $
                   </h3>
                 </div>
-                {findProductQuantity(product.id, cartUser?.products) ? (
+                {findProductQuantity(product.id, cartUser.products) ? (
                   <div className={styles.buttonBlock}>
-                    <button className={styles.buttonCount}>
+                    <button
+                      className={styles.buttonCount}
+                      onClick={() =>
+                        handlerCounterItems(
+                          cartUser.id,
+                          product.id,
+                          findProductQuantity(product.id, cartUser.products) -
+                            1,
+                          cartUser,
+                        )
+                      }
+                      disabled={status === 'pending' || status === 'rejected'}
+                    >
                       <svg
                         width="18"
                         height="4"
@@ -87,10 +105,29 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
                       </svg>
                     </button>
                     <p className={styles.counter}>
-                      {findProductQuantity(product.id, cartUser?.products)}{' '}
-                      items
+                      {findProductQuantity(product.id, cartUser.products)}{' '}
+                      {pluralizeItem(
+                        findProductQuantity(product.id, cartUser.products),
+                      )}
                     </p>
-                    <button className={styles.buttonCount}>
+                    <button
+                      className={styles.buttonCount}
+                      onClick={() =>
+                        handlerCounterItems(
+                          cartUser.id,
+                          product.id,
+                          findProductQuantity(product.id, cartUser.products) +
+                            1,
+                          cartUser,
+                        )
+                      }
+                      disabled={
+                        status === 'pending' ||
+                        status === 'rejected' ||
+                        findProductQuantity(product.id, cartUser.products) ===
+                          product.stock
+                      }
+                    >
                       <svg
                         width="18"
                         height="18"
@@ -110,7 +147,19 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
                     </button>
                   </div>
                 ) : (
-                  <button className={styles.productButton} aria-label="addCart">
+                  <button
+                    className={styles.productButton}
+                    onClick={() =>
+                      handlerCounterItems(
+                        cartUser.id,
+                        product.id,
+                        findProductQuantity(product.id, cartUser.products) + 1,
+                        cartUser,
+                      )
+                    }
+                    aria-label="addCart"
+                    disabled={status === 'pending' || status === 'rejected'}
+                  >
                     <svg
                       width="18"
                       height="18"
@@ -128,6 +177,9 @@ const ProductItems: React.FC<IProps> = ({ allProducts, isLoading, error }) => {
               </div>
             </section>
           ))}
+          {status === 'rejected' && (
+            <p className={styles.error}>Something went wrong. Try again</p>
+          )}
         </div>
       ) : null}
     </>

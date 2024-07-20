@@ -8,47 +8,70 @@ import {
   calculateTotalPriceProduct,
   findProductQuantity,
 } from '../../helpers/Helper'
-import { useState } from 'react'
-import { useGetProductByIdQuery } from '../../services/productApi'
-import { RootState } from '../../store/store'
+import { useEffect, useState } from 'react'
+import {
+  useGetCurrentUserQuery,
+  useGetProductByIdQuery,
+} from '../../services/productApi'
+import { RootState, useAppDispatch } from '../../store/store'
 import { useSelector } from 'react-redux'
-import Button from '../../components/button/Button'
+import { setAuth } from '../../services/authSlice'
+import { ICartState, updateCartUser } from '../../services/cartSlice'
 
 function ProductPage() {
   const { id } = useParams()
   const paramsToNumber = Number(id)
   const [currentImgUrl, setCurrentImgUrl] = useState('')
-
+  const dispatch = useAppDispatch()
+  const { data: currentUser } = useGetCurrentUserQuery('')
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductByIdQuery(paramsToNumber)
 
-  const cartUserById = useSelector((state: RootState) => {
-    if (state.cart.dataById) {
-      return state.cart.dataById
-    } else {
-      return null
-    }
+  const cartUser = useSelector((state: RootState) => {
+    if (state.cart.dataById) return state.cart.dataById
   })
 
+  const status = useSelector((state: RootState) => state.cart.statusById)
+  const handlerCounterItems = (
+    idCart: number,
+    idProduct: number,
+    quantityProduct: number,
+    cartUser: ICartState,
+  ) => {
+    console.log(idCart, idProduct, quantityProduct, cartUser)
 
-  const cartUser = cartUserById?.carts?.[0]
+    dispatch(updateCartUser({ idCart, idProduct, quantityProduct, cartUser }))
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(
+        setAuth({
+          id: currentUser?.id,
+          firstName: currentUser?.firstName,
+          lastName: currentUser?.lastName,
+          isAuth: true,
+        }),
+      )
+    }
+  }, [currentUser, dispatch])
 
   return (
     <HelmetProvider>
       <Helmet>
         <title>{`product?.title`} | Goods4you</title>
       </Helmet>
-      <Header isLogin={false}/>
+      <Header isLogin={false} />
       <main className={styles.wrapper}>
         <div className={styles.container}>
           {error ? (
             <h1>Oh no, there was an error</h1>
           ) : isLoading ? (
             <h1 className={styles.loading}>Loading...</h1>
-          ) : product ? (
+          ) : product && cartUser ? (
             <>
               <section className={styles.blockProductImg}>
                 <img
@@ -125,9 +148,21 @@ function ProductPage() {
                     </p>
                   </div>
 
-                  {findProductQuantity(product.id, cartUser?.products) ? (
+                  {findProductQuantity(product.id, cartUser.products) ? (
                     <div className={styles.buttonBlock}>
-                      <button className={styles.buttonCount}>
+                      <button
+                        className={styles.buttonCount}
+                        onClick={() =>
+                          handlerCounterItems(
+                            cartUser.id,
+                            product.id,
+                            findProductQuantity(product.id, cartUser.products) -
+                              1,
+                            cartUser,
+                          )
+                        }
+                        disabled={status === 'pending' || status === 'rejected'}
+                      >
                         <svg
                           width="18"
                           height="4"
@@ -145,7 +180,24 @@ function ProductPage() {
                         {findProductQuantity(product.id, cartUser?.products)}{' '}
                         items
                       </p>
-                      <button className={styles.buttonCount}>
+                      <button
+                        className={styles.buttonCount}
+                        onClick={() =>
+                          handlerCounterItems(
+                            cartUser.id,
+                            product.id,
+                            findProductQuantity(product.id, cartUser.products) +
+                              1,
+                            cartUser,
+                          )
+                        }
+                        disabled={
+                          status === 'pending' ||
+                          status === 'rejected' ||
+                          findProductQuantity(product.id, cartUser.products) ===
+                            product.stock
+                        }
+                      >
                         <svg
                           width="18"
                           height="18"
@@ -165,10 +217,29 @@ function ProductPage() {
                       </button>
                     </div>
                   ) : (
-                    <Button label={'Add to cart'} mode={false} typeButton={"button"}/>
+                    <button
+                      type="button"
+                      className={styles.button}
+                      onClick={() =>
+                        handlerCounterItems(
+                          cartUser.id,
+                          product.id,
+                          findProductQuantity(product.id, cartUser.products) +
+                            1,
+                          cartUser,
+                        )
+                      }
+                      aria-label="addCart"
+                      disabled={status === 'pending' || status === 'rejected'}
+                    >
+                      Add to cart
+                    </button>
                   )}
                 </div>
               </section>
+              {status === 'rejected' && (
+                <p className={styles.error}>Something went wrong. Try again</p>
+              )}
             </>
           ) : null}
         </div>
