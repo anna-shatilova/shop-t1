@@ -61,7 +61,6 @@ export const updateCartUser = createAsyncThunk<
     if (!isProductInCart) {
       productsMap.push({ id: idProduct, quantity: quantityProduct })
     }
-    console.log('productsMap', productsMap)
 
     const response = await fetch(`https://dummyjson.com/carts/${idCart}`, {
       method: 'PUT',
@@ -120,8 +119,6 @@ export const cartSlice = createSlice({
   },
 })
 
-// export const selectStatusById = (state: RootState) => state.cart.statusById
-// export const selectDataById = (state: RootState) => state.cart.dataById
 export const { increment, decrement } = cartSlice.actions
 export const cartsReducer = cartSlice.reducer
 

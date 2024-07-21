@@ -18,6 +18,9 @@ export const calculateTotalPriceProduct = (
   initialPrice: number,
   discountPercentage: number,
 ) => {
+  if (initialPrice < 0) {
+    throw new Error('Initial price cannot be negative')
+  }
   const discountDecimal = discountPercentage / 100
   const discountAmount = initialPrice * discountDecimal
   const finalPrice = initialPrice - discountAmount
