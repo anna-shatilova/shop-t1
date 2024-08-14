@@ -10,7 +10,7 @@ function Footer() {
         <Link
           to={'/'}
           className={styles.logo}
-          aria-label="обновление главной страницы"
+          aria-label="page update"
         >
           <img className={styles.logoImg} src={Logo} alt="logo" />
         </Link>

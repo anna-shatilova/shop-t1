@@ -41,7 +41,7 @@ const Accordion = () => {
   return (
     <section id="FQA" className={styles.containerAccordion}>
       <div className={styles.accordion}>
-        <h2 className={styles.headingFqa}>FQA</h2>
+        <h2 className={styles.headingFqa}>FAQ</h2>
         {items.map((item, id) => (
           <div
             key={id}
@@ -50,7 +50,7 @@ const Accordion = () => {
           >
             <div className={styles.question}>
               <span>{item.question}</span>
-              <button className={styles.toggle}>
+              <button className={styles.toggle} aria-label="open">
                 <svg
                   className={`${activeItems.includes(item) && styles.plusRotate}`}
                   width="25"
@@ -70,8 +70,7 @@ const Accordion = () => {
               <div
                 className={styles.answer}
                 style={{
-                  transition: 'height 0.5s ease-out',
-                  height: activeItems.includes(item) ? 'auto' : '0px',
+                  height: activeItems.includes(item) ? 'auto' : '0',
                 }}
               >
                 {item.answer}

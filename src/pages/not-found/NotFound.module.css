@@ -22,3 +22,18 @@
   color: #4e4e4e;
   margin-bottom: 20px;
 }
+.button {
+  width: 177px;
+  height: 62px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #f14f4f;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #ffffff;
+  transition: background 0.3s;
+}
+.button:hover {
+  background: #8c2828;
+}

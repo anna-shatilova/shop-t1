@@ -12,12 +12,13 @@
   font-size: 36px;
   font-weight: 700;
   line-height: 56px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ffffff;
 }
 .item {
   border-bottom: 1px solid #ffffff;
-  padding: 20px 0;
+  padding: 30px 0 20px 0;
   overflow: hidden;
-  transition: 'height 0.5s ease-out';
 }
 .question {
   display: flex;
@@ -33,23 +34,18 @@
 }
 
 .toggle {
-  font-size: 24px;
-  font-weight: 400;
-  border: none;
   background-color: transparent;
-  color: #ffffff;
   cursor: pointer;
-  width: 25px;
-  height: 25px;
 }
 
 .plusRotate {
   transform: rotate(45deg);
-  transition: all 0.3s ease-out;
+  transition: transform 0.5s;
 }
 .answer {
   padding-top: 20px;
   font-size: 16px;
   font-weight: 600;
   line-height: 26px;
+  transition: height 0.5s;
 }

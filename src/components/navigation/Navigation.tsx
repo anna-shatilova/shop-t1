@@ -5,21 +5,29 @@ import {
   handleScrollToAnchorCatalog,
   handleScrollToAnchorFQA,
 } from '../../helpers/Helper'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../store/store'
+import { selectDataById } from '../../services/cartSlice'
 
 interface NavigationProps {
-  panel: string
+  panel: 'header' | 'footer'
 }
 
 function Navigation({ panel }: NavigationProps) {
+  const idUserForCart = 33
+  const cartUserById = useSelector((state: RootState) => selectDataById(state, idUserForCart))
+
+  const cartUser = cartUserById?.carts[0]
+
   return (
     <ul className={styles.ul}>
-      <Link to={'#catalog'}>
+      <Link to={'/#catalog'}>
         <li className={styles.li} onClick={handleScrollToAnchorCatalog}>
           Catalog
         </li>
       </Link>
 
-      <Link to={'#FQA'}>
+      <Link to={'/#FQA'}>
         <li className={styles.li} onClick={handleScrollToAnchorFQA}>
           FAQ
         </li>
@@ -31,7 +39,11 @@ function Navigation({ panel }: NavigationProps) {
             <li className={styles.li}>Cart</li>
             <div className={styles.cartBlockSvg}>
               <img className={styles.cartImg} src={cartSvg} alt="cart" />
-              <span className={styles.cartCounter}>1</span>
+              {cartUser?.totalQuantity && (
+                <span className={styles.cartCounter}>
+                  {cartUser?.totalQuantity}
+                </span>
+              )}
             </div>
           </Link>
           <li className={styles.liAvatar}>Johnson Smith</li>

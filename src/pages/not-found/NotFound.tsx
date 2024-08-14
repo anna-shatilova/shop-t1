@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import imageNotFound from '../../assets/not-found.png'
-// import { Button } from '../../App.styles'
 import styles from './NotFound.module.css'
 
 function NotFound() {
@@ -12,13 +11,13 @@ function NotFound() {
         className={styles.image}
       />
       <h1 className={styles.title}>404</h1>
-      <h3 className={styles.heading}>Страница не найдена</h3>
+      <h3 className={styles.heading}>Page not found</h3>
       <p className={styles.text}>
-        Возможно, она была удалена <br /> или перенесена на другой адрес
+      It may have been deleted <br /> or moved to another address
       </p>
 
       <Link to={`/`}>
-        <button className={styles.button}>Вернуться на главную</button>
+        <button className={styles.button}>Go back to the main page</button>
       </Link>
     </div>
   )
