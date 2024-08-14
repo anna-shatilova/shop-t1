@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   gap: 48px;
-  height: 80vh;
 }
 .title {
   font-size: 36px;
@@ -29,6 +28,9 @@
   gap: 10px;
   padding: 22px 37px;
   border: 1px solid #c4c4c4;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  width: 70%;
 }
 .cartItem {
   display: flex;
@@ -44,6 +46,7 @@
 .cartItemStartDel {
   justify-content: space-between;
   margin-right: 12px;
+  /* opacity: 0.6; */
 }
 .cartItemContent {
   width: 52%;
@@ -86,6 +89,7 @@
   display: flex;
   gap: 22px;
   align-items: center;
+  width: 188px;
 }
 
 .buttonCount {
@@ -97,6 +101,10 @@
   color: #ffffff;
   transition: background 0.3s;
 }
+.buttonCount:disabled {
+  background: #f8afaf;
+}
+
 .buttonCountPlus:hover {
   background: #8c2828;
 }
@@ -124,10 +132,20 @@
   background: #f14f4f;
   margin-right: 12px;
 }
+.productButton:disabled {
+  background: #f8afaf;
+}
+
 .noItems {
   font-size: 24px;
   font-weight: 600;
   line-height: 36px;
   text-align: center;
   color: #b2b5bb;
+}
+.error {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #f14f4f;
 }

@@ -24,13 +24,15 @@ export const ButtonMP: Story = {
   args: {
     mode: true,
     label: 'Go to shopping',
+    typeButton: 'button',
   },
 }
 
-export const ButtonPP: Story = {
+export const ButtonLP: Story = {
   args: {
     mode: false,
-    label: 'Add to cart',
+    label: 'Sign in',
+    typeButton: 'submit',
   },
 }
 

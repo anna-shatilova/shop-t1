@@ -1,28 +1,28 @@
 .button {
-    border-radius: 4px;
-    background: #f14f4f;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22px;
-    color: #ffffff;
-    transition: background 0.3s;
-  }
-  .button:hover {
-    background: #8c2828;
-  }
-  
-  .buttonMainPage {
-    position: absolute;
-    top: 323px;
-    width: 207px;
-    height: 62px;
+  height: 62px;
+  border-radius: 4px;
+  background: #f14f4f;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #ffffff;
+  transition: background 0.3s;
+}
+.button:hover {
+  background: #8c2828;
+}
 
-  }
-  .buttonProductPage {
-    padding: 20px 50px 20px 50px;
-  }
-  
-  /* .buttonShowMore {
+.buttonMainPage {
+  position: absolute;
+  top: 323px;
+  width: 207px;
+}
+.buttonProductPage {
+  padding: 20px 50px 20px 50px;
+  width: 176px;
+}
+
+/* .buttonShowMore {
     width: 177px;
     height: 62px;
     margin: 0 auto;
@@ -43,4 +43,3 @@
   .buttonShowMore:disabled {
     background: #f8afaf;
   } */
-  
