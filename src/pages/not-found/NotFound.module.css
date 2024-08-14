@@ -1,0 +1,24 @@
+.container {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20vh;
+}
+.image {
+  width: auto;
+  height: 280px;
+}
+.title {
+  font-size: 160px;
+}
+.heading {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+.text {
+  font-size: 18px;
+  line-height: 133%;
+  color: #4e4e4e;
+  margin-bottom: 20px;
+}
